@@ -40,6 +40,10 @@ function terminalsCtrl($scope, $rootScope, $sce, socketService){
             }
         });
     });
+
+    $scope.removeTerminal = function(index){
+        $scope.terminals.splice(index, 1);
+    };
 }
 
 
