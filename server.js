@@ -66,7 +66,6 @@ io.on('connection', function (socket){
 					chunk = ansi_up.ansi_to_html(chunk);
 					chunk = chunk.replace(re,'');
 					if(chunk.length <= 1) return;
-					console.log(chunk);
 					socket.emit('terminal:logs', {
 						id: container.Id,
 						logs: chunk
