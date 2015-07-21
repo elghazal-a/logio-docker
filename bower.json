@@ -1,0 +1,21 @@
+{
+  "name": "asdecartes",
+  "version": "0.0.1",
+  "authors": [
+    "geniousphp <geniousphp@gmail.com>"
+  ],
+  "main": "server.js",
+  "license": "MIT",
+  "homepage": "http://www.asdecartes.com",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.3",
+    "bootstrap": "~3.3.5",
+    "angular-bootstrap": "~0.13.0",
+    "angular-safeapply": "~1.0.4",
+    "angular-sanitize": "~1.4.3",
+    "angular-scroll-glue": "~2.0.6",
+    "angular-perfect-scrollbar": "~0.0.4"
+  },
+  "devDependencies": {}
+}

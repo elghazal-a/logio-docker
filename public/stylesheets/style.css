@@ -1,0 +1,17 @@
+.terminal {
+    background-color: #290029;
+    color: #FFFFFF;
+    font-family: Lucida Console,CommPlus, MS LineDraw, Telix TT Terminal,monospace;
+    font-size: 16px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+}
+
+.scroller {
+    white-space: pre-line;
+    height: 600px;
+    overflow-y: hidden;
+    position: relative;
+}
+

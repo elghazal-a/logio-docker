@@ -1,0 +1,37 @@
+{
+  "name": "soam",
+  "version": "1.0.0",
+  "description": "SOA based application manager",
+  "main": "server.js",
+  "scripts": {
+    "start": "DEBUG=socket.io:* nodemon server.js",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:geniousphp/soam.git"
+  },
+  "keywords": [
+    "soa",
+    "microservices",
+    "docker",
+    "compose",
+    "node.js",
+    "terminal"
+  ],
+  "author": "geniousphp <geniousphp@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "ansi_up": "^1.2.1",
+    "body-parser": "^1.13.2",
+    "dockerode": "^2.2.2",
+    "errorhandler": "^1.4.1",
+    "express": "^4.13.1",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.4",
+    "morgan": "^1.6.1",
+    "multer": "^1.0.0",
+    "socket.io": "^1.3.6",
+    "web-terminal": "^0.7.0"
+  }
+}
