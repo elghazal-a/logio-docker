@@ -1,2 +1,3 @@
+#!/bin/bash
 /usr/bin/google-chrome http://localhost:3333
-node server.js devas
+NODE_ENV=production node server.js $1

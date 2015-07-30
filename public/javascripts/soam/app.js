@@ -38,6 +38,9 @@ function terminalsCtrl($scope, $rootScope, $sce, socketService){
                 terminal.content += '<br>';
                 terminal.content += $sce.trustAsHtml(data.logs);
             }
+            if(terminal.content.length > 10000){
+                terminal.content = terminal.content.substring(terminal.content.length - 2000);
+            }
         });
     });
 

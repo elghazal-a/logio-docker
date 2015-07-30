@@ -6,9 +6,8 @@ block body
 	div(ng-controller="terminalsCtrl")
 		tabset
 			tab(ng-repeat="terminal in terminals")
-				tab-heading {{terminal.title}} 
-					a(ng-click="removeTerminal($index)", href='')
-						&#10006;
+				tab-heading {{::terminal.title}} 
+					a(ng-click="removeTerminal($index)", href='') &#10006;
 				perfect-scrollbar.terminal.scroller(scroll-glue, wheel-propagation="true", wheel-speed="10", min-scrollbar-length="20")
 					div.terminal(ng-bind-html="terminal.content")
 
