@@ -4,8 +4,8 @@
   "description": "SOA based application manager",
   "main": "server.js",
   "scripts": {
-    "start": "DEBUG=socket.io:* nodemon server.js",
-    "test": "npm test"
+    "start": "NODE_ENV=development DEBUG=socket.io:* nodemon server.js",
+    "test": "NODE_ENV=test DEBUG=socket.io:* node server.js"
   },
   "repository": {
     "type": "git",

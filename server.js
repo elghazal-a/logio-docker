@@ -40,7 +40,10 @@ var docker = new Docker({ socketPath: socket });
 io.on('connection', function (socket){
 	docker.listContainers({all: true}, function(err, containers){
 		containers = containers.filter(function(container){
-			return (container.Labels) && (container.Labels.hasOwnProperty('com.docker.compose.project')) && (container.Labels['com.docker.compose.project'] == project);
+			return (container.Labels) && 
+			(!container.Labels.hasOwnProperty('soam.ignore')) && 
+			(container.Labels.hasOwnProperty('com.docker.compose.project')) && 
+			(container.Labels['com.docker.compose.project'] == project);
 		});
 		// docker.getContainer(containers[1].Id)
 		// .logs({
@@ -59,7 +62,7 @@ io.on('connection', function (socket){
 				follow: true,
 				stdout: true,
 				stderr: true,
-				tail  : 20
+				tail  : 30
 			}, function(err, logs){
 				logs.setEncoding('utf8');
 				logs.on('data', function(chunk){
