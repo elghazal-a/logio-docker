@@ -1,8 +1,4 @@
-erreurs a ne pas refaire
 public/javascripts/vendor/*
-tmp/
-
-
 
 
 # GitHub Gitignore #

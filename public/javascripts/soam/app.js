@@ -18,8 +18,9 @@ soam.controller('terminalsCtrl', ['$scope',
 
 
 function terminalsCtrl($scope, $rootScope, $sce, socketService){
+    var limitContent = 20000;
     $scope.terminals = [];
-    var mySocket = new socketService($scope, 'http://localhost:3333', '/');
+    var mySocket = new socketService($scope, '/', '/');
     mySocket.connectSocket();
     mySocket.on('terminals:initialize', function(data){
         $scope.terminals = [];
@@ -38,8 +39,8 @@ function terminalsCtrl($scope, $rootScope, $sce, socketService){
                 terminal.content += '<br>';
                 terminal.content += $sce.trustAsHtml(data.logs);
             }
-            if(terminal.content.length > 10000){
-                terminal.content = terminal.content.substring(terminal.content.length - 2000);
+            if(terminal.content.length > limitContent){
+                terminal.content = terminal.content.substring(0, 4000);
             }
         });
     });

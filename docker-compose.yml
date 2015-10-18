@@ -1,0 +1,9 @@
+soam:
+    image: quay.io/geniousphp/soam
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+    - "28778:28778"
+    privileged: true
+    environment:
+    - PORT=28778
