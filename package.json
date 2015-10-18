@@ -20,7 +20,7 @@
     "terminal"
   ],
   "author": "geniousphp <geniousphp@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "ansi_up": "^1.2.1",
     "bl": "^1.0.0",
