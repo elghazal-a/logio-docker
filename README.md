@@ -1,8 +1,5 @@
 # SOAM
 
-Forward all your logs to [Log-Io](http://logio.org/)
-and see it to http://localhost:28778
-
 Forwad your Dockerized SOA or microservices based app logs to browser.
 
 ## Usage as a Container
