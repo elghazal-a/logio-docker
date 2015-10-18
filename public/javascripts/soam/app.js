@@ -36,11 +36,12 @@ function terminalsCtrl($scope, $rootScope, $sce, socketService){
     mySocket.on('terminal:logs', function(data){
         $scope.terminals.forEach(function(terminal){
             if(terminal.id == data.id){
-                terminal.content += '<br>';
                 terminal.content += $sce.trustAsHtml(data.logs);
-            }
-            if(terminal.content.length > limitContent){
-                terminal.content = terminal.content.substring(0, 4000);
+
+                if(terminal.content.length > limitContent){
+                    terminal.content = terminal.content.slice(4000);
+                    terminal.content = terminal.content.slice(terminal.content.indexOf("<br>"));
+                }
             }
         });
     });
