@@ -20,7 +20,7 @@ soam:
   - DOCKER_SOCKET=/var/run/docker.sock 
   - SHOW_LOG_BY_LABEL=soam.log
 
-#Logs 
+#SOAM will show this service log because of "soam.log" label
 service:
     ...
     labels:
