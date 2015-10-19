@@ -18,8 +18,8 @@ var docker 			= new Docker({ socketPath: socket });
 var showLogByLabel 	= process.env.SHOW_LOG_BY_LABEL || 'soam.log';
 
 var Logs = {};
-var Containers;
 var mySocket = null;
+var Stream;
 
 app.set('port', process.env.PORT || 28778);
 app.set('views', path.join(__dirname, 'views'));
@@ -28,20 +28,9 @@ app.get('/', function(req, res){res.render('index'); });
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-docker.listContainers({all: true }, function(err, containers){
-	containers = containers.filter(function(container){
-		return (container.Labels) && 
-		(container.Labels.hasOwnProperty(showLogByLabel));
-	});
-	Containers = containers;
-
-	io.on('connection', function (socket){
-		socket.emit('terminals:initialize', { containers: Containers });
-		mySocket = socket;
-	});
-
+var fetchLogs = function(containers, mySocketId){
 	containers.forEach(function(container){
-		Logs[container.Id] = '';
+		Logs[mySocketId][container.Id] = '';
 		var data = toEmit(container);
 		docker.getContainer(container.Id).logs({
 			follow: true, 
@@ -55,25 +44,41 @@ docker.listContainers({all: true }, function(err, containers){
 		  	})
 			stream.pipe(filter);
 			filter.on('data', function(chunk){
-				Logs[container.Id] += '<br>';
-				Logs[container.Id] += ansi_up.ansi_to_html(chunk.line);
+				Logs[mySocketId][container.Id] += '<br>';
+				Logs[mySocketId][container.Id] += ansi_up.ansi_to_html(chunk.line);
 			});
 		});
+	});
+	
+}
+
+
+io.on('connection', function (socket){
+	mySocket = socket;
+	Logs[mySocket.id] = {};
+	docker.listContainers({all: true }, function(err, containers){
+		containers = containers.filter(function(container){
+			return (container.Labels) && 
+			(container.Labels.hasOwnProperty(showLogByLabel));
+		});
+		fetchLogs(containers, mySocket.id);
+		socket.emit('terminals:initialize', { containers: containers });
 	});
 });
 
 
 function sendLogs(containerId, logs){
-	io.emit('terminal:logs', {
+	mySocket.emit('terminal:logs', {
 		id: containerId,
 		logs: logs
 	});
 }
 setInterval(function(){
-	for (var containerId in Logs) {
-		if (Logs[containerId].length > 0) {
-			sendLogs(containerId, Logs[containerId])
-			Logs[containerId] = [];
+	if(mySocket == null || !Logs[mySocket.id]) return;
+	for (var containerId in Logs[mySocket.id]) {
+		if (Logs[mySocket.id][containerId].length > 0) {
+			sendLogs(containerId, Logs[mySocket.id][containerId])
+			Logs[mySocket.id][containerId] = [];
 		}
 	}
 }, 500);
