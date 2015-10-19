@@ -10,6 +10,7 @@ block body
 					a(ng-click="removeTerminal($index)", href='') &#10006;
 				perfect-scrollbar.terminal.scroller(scroll-glue, wheel-propagation="true", wheel-speed="10", min-scrollbar-length="20")
 					div.terminal(ng-bind-html="terminal.content")
+				button.btn-default.clear(type="button", ng-click="clearTerminal($index)") Clear
 
 
 	script(src="/socket.io/socket.io.js")

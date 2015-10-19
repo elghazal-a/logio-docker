@@ -20,6 +20,13 @@ soam.controller('terminalsCtrl', ['$scope',
 function terminalsCtrl($scope, $rootScope, $sce, socketService){
     var limitContent = 20000;
     $scope.terminals = [];
+    /*
+        {
+            id: container id,
+            title: container name,
+            content: logs
+        }
+    */
     var mySocket = new socketService($scope, '/', '/');
     mySocket.connectSocket();
     mySocket.on('terminals:initialize', function(data){
@@ -48,6 +55,10 @@ function terminalsCtrl($scope, $rootScope, $sce, socketService){
 
     $scope.removeTerminal = function(index){
         $scope.terminals.splice(index, 1);
+    };
+
+    $scope.clearTerminal = function(index){
+        $scope.terminals[index].content = '';
     };
 }
 
