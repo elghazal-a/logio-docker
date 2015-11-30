@@ -9,7 +9,7 @@ Forwad your Dockerized SOA or microservices based app logs to browser.
 ```
 cat >docker-compose.yml <<EOF
 soam:
-  image: quay.io/geniousphp/soam:0.1
+  image: geniousphp/soam
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock
   ports:

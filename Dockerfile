@@ -1,4 +1,4 @@
-FROM node:0.12.7-wheezy
+FROM node:0.12-wheezy
 MAINTAINER Elghazal Ahmed <geniousphp@gmail.com>
 
 ENV NODE_ENV production
