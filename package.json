@@ -1,7 +1,7 @@
 {
   "name": "soam",
-  "version": "0.1.0",
-  "description": "SOA based application manager",
+  "version": "1.0.0",
+  "description": "Dockerized SOA based application manager",
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=development node-dev server.js",
@@ -16,8 +16,8 @@
     "microservices",
     "docker",
     "compose",
-    "node.js",
-    "terminal"
+    "terminal",
+    "logs"
   ],
   "author": "geniousphp <geniousphp@gmail.com>",
   "license": "MIT",
