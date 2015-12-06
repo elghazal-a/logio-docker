@@ -4,7 +4,7 @@
   "description": "Dockerized SOA based application manager",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=development node-dev server.js",
+    "start": "NODE_ENV=development DEBUG=socket.io:* node-dev server.js",
     "test": "NODE_ENV=test DEBUG=socket.io:* node-dev server.js"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "ansi_up": "^1.2.1",
     "bl": "^1.0.0",
     "dockerode": "^2.2.3",
+    "errorhandler": "^1.4.2",
     "express": "^4.13.1",
     "jade": "^1.11.0",
     "lodash": "^3.10.1",

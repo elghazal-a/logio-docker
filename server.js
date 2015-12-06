@@ -1,6 +1,7 @@
 var fs      		= require('fs');
 var _ 	     		= require('lodash');
 var express         = require('express');   
+var errorhandler	= require('errorhandler');   
 var app          	= module.exports = express();
 var server       	= require('http').Server(app);
 var io           	= require('socket.io')(server);
@@ -16,6 +17,7 @@ if (!stats.isSocket()) {
 }
 var docker 			= new Docker({ socketPath: socket });
 var showLogByLabel 	= process.env.SHOW_LOG_BY_LABEL || 'soam.log';
+var showAllLogs 	= process.env.SHOW_ALL_LOGS || false;
 
 var Logs = {};
 var mySocket = null;
@@ -26,6 +28,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.get('/', function(req, res){res.render('index'); });
 app.use(express.static(path.join(__dirname, 'public')));
+if ('development' == app.get('env') || 'test' == app.get('env')) {
+  app.use(errorhandler({ log : true}));
+}
+else{
+    app.use(function(err, req, res, next) {
+        res.status(500);
+        res.end();
+    });
+}
+
 
 
 var fetchLogs = function(containers, mySocketId){
@@ -54,13 +66,16 @@ var fetchLogs = function(containers, mySocketId){
 
 
 io.on('connection', function (socket){
+	console.log('New Socket.io connection');
 	mySocket = socket;
 	Logs[mySocket.id] = {};
 	docker.listContainers({all: true }, function(err, containers){
-		containers = containers.filter(function(container){
-			return (container.Labels) && 
-			(container.Labels.hasOwnProperty(showLogByLabel));
-		});
+		if(!showAllLogs){
+			containers = containers.filter(function(container){
+				return (container.Labels) && 
+				(container.Labels.hasOwnProperty(showLogByLabel));
+			});
+		}
 		fetchLogs(containers, mySocket.id);
 		socket.emit('terminals:initialize', { containers: containers });
 	});
