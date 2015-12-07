@@ -4,6 +4,7 @@
   "description": "Dockerized SOA based application manager",
   "main": "server.js",
   "scripts": {
+    "build": "echo none",
     "start": "NODE_ENV=development DEBUG=socket.io:* node-dev server.js",
     "test": "NODE_ENV=test DEBUG=socket.io:* node-dev server.js"
   },
@@ -12,12 +13,12 @@
     "url": "git@bitbucket.org:geniousphp/soam.git"
   },
   "keywords": [
+    "logs",
+    "docker",
+    "terminal",
     "soa",
     "microservices",
-    "docker",
-    "compose",
-    "terminal",
-    "logs"
+    "compose"
   ],
   "author": "geniousphp <geniousphp@gmail.com>",
   "license": "MIT",
