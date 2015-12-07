@@ -3,7 +3,7 @@
 Forwad your Dockerized stack logs to a nice looking browser based UI.
 
 ## Features
-* Forwad your containers logs to a browser based UI (inspired by [logio](http://logio.org/))
+* Forward your containers logs to a browser based UI (inspired by [logio](http://logio.org/))
 * Show logs in real-time (powered by [socket.io](http://socket.io/))
 * Filter containers by label
 * Filter within logs
