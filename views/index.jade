@@ -1,32 +1,60 @@
-extends head
-block body
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title Service Oriented Architecture Manager
+    base(href='/')
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Inconsolata', rel='stylesheet', type='text/css')
+    link(href='log.io.css', rel='stylesheet', type='text/css')
+
+  body(ng-app="soam", ng-controller="containersCtrl")
+    #web_client()
+      #log_controls
+        a.select_mode.active Containers
+        #log_control_streams.object_controls
+          input.filter(ng-model="containerFilter", placeholder="Filter...", type="text")
+          .groups(ng-cloak)
+            .group(ng-repeat="container in containers | filter:containerFilter")
+              .header
+                .screen_buttons
+                  input(ng-repeat="terminal in terminals", 
+                    type="checkbox", 
+                    ng-checked="container.terminal == terminal.id", 
+                    ng-click="showLogs($event, container.terminal, container.id, terminal.id)", 
+                    title="screen-{{$index + 1}}")
+                .diode.floatl.active.color2
+                .object_name.floatl {{::container.title}}
+                div(style="clear: both;")
+    #log_screens
+      .log_screens(ng-cloak)
+        .log_screen(ng-repeat="terminal in terminals")
+          .controls
+            a.new(href="#", ng-click="newTerminal($index)", ng-if="terminals.length == $index + 1") new
+            a.close(href="#", ng-click="removeTerminal($index)", ng-if="$index > 0") close
+            a.clear(href="#", ng-click="clearTerminal($index)") clear
+            a.filter(href="#")
+              | filter 
+              input(type="text", ng-model="terminal.filterString")
+          .messages(scroll-glue, ng-style="{height: dynamicHeight}")
+            .msg
+              p
+                span.message(ng-bind-html="terminal.logs | filterLogs:terminal.filterString")
+
+      //- .status_bar
+      //-   a#new_screen_button.button(href="#", ng-click="newTerminal()") New Screen
+      //-   .stats
+      //-   div(style="clear: both;")
 
 
+  script(src="/socket.io/socket.io.js")
 
-	div(ng-controller="terminalsCtrl")
-		tabset
-			tab(ng-repeat="terminal in terminals")
-				tab-heading {{::terminal.title}} 
-					a(ng-click="removeTerminal($index)", href='') &#10006;
-				perfect-scrollbar.terminal.scroller(scroll-glue, wheel-propagation="true", wheel-speed="10", min-scrollbar-length="20")
-					div.terminal(ng-bind-html="terminal.content")
-				button.btn-default.clear(type="button", ng-click="clearTerminal($index)") Clear
+  script(src='/javascripts/vendor/jquery/dist/jquery.js')
 
+  script(src='/javascripts/vendor/angular/angular.js')
+  script(src='/javascripts/textAngular-sanitize.js')
+  script(src='/javascripts/vendor/angular-safeapply/safe-apply.js')
+  script(src='/javascripts/vendor/angular-scroll-glue/src/scrollglue.js')
 
-	script(src="/socket.io/socket.io.js")
-
-	script(src='/javascripts/vendor/jquery/dist/jquery.js')
-	script(src='/javascripts/vendor/bootstrap/dist/js/bootstrap.js')
-
-	script(src='/javascripts/vendor/angular/angular.js')
-	script(src='/javascripts/textAngular-sanitize.js')
-	script(src='/javascripts/vendor/angular-bootstrap/ui-bootstrap.js')
-	script(src='/javascripts/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js')
-	script(src='/javascripts/vendor/angular-safeapply/safe-apply.js')
-	script(src='/javascripts/vendor/angular-scroll-glue/src/scrollglue.js')
-	script(src='/javascripts/vendor/perfect-scrollbar/min/perfect-scrollbar.min.js')
-	script(src='/javascripts/vendor/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js')
-
-	script(src='/javascripts/soam/app.js')
-	script(src='/javascripts/soam/socket.js')
-
+  script(src='/javascripts/soam/app.js')
+  script(src='/javascripts/soam/socket.js')
