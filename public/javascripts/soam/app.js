@@ -5,14 +5,15 @@ var soam = angular.module('soam', [
 	'SafeApply',
 	'ngSanitize',
 	'luegg.directives'
-  ]);
+ ]);
 
 
 soam.controller('containersCtrl', ['$scope',
 	'$rootScope',
 	'$sce',
 	'socketService',
-	containersCtrl]);
+	containersCtrl
+]);
 
 
 function containersCtrl($scope, $rootScope, $sce, socketService){
@@ -67,13 +68,13 @@ function containersCtrl($scope, $rootScope, $sce, socketService){
 		if($event.target.checked){
 			//We have checked the checkbox
 			
-			
 			//Remove logs if container logs was shown in an other terminal
 			for (var i = 0; i < $scope.terminals.length; i++) {
 				if($scope.terminals[i].id == previousTerminalId){
 					$scope.terminals[i].logs = '';
 				}
 			}
+			//Assign the new terminalId to this container
 			for (var i = 0; i < $scope.containers.length; i++) {
 				if($scope.containers[i].terminal == terminalId){
 					$scope.containers[i].terminal = -1;
@@ -144,5 +145,20 @@ function containersCtrl($scope, $rootScope, $sce, socketService){
 	};
 }
 
+soam.filter('filterLogs', function(){
+    return function(logs, filterString){
+    	if(undefined === filterString || null === filterString || filterString == '')
+    		return logs;
+
+    	var re = new RegExp(filterString, 'g');
+
+        return logs.split('<br>')
+        .filter(function(string){
+    		return string.indexOf(filterString) >= 0;
+    	})
+        .join('<br>')
+        .replace(re, '<span class="highlight">' + filterString + '</span>');
+    }
+});
 
 })();

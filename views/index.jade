@@ -10,11 +10,11 @@ html
 
   body(ng-app="soam", ng-controller="containersCtrl")
     #web_client()
-      #log_controls(ng-cloak)
-        a.select_mode.active(href='#log_control_streams') Containers
+      #log_controls
+        a.select_mode.active Containers
         #log_control_streams.object_controls
           input.filter(ng-model="containerFilter", placeholder="Filter...", type="text")
-          .groups
+          .groups(ng-cloak)
             .group(ng-repeat="container in containers | filter:containerFilter")
               .header
                 .screen_buttons
@@ -34,13 +34,11 @@ html
             a.clear(href="#", ng-click="clearTerminal($index)") clear
             a.filter(href="#")
               | filter 
-              input(type="text", ng-model="terminal.filterBy")
+              input(type="text", ng-model="terminal.filterString")
           .messages(scroll-glue, ng-style="{height: dynamicHeight}")
             .msg
               p
-                //- span.stream.color2 nginx
-                //- span.node.color1 logio_webserver01
-                span.message(ng-bind-html="terminal.logs")
+                span.message(ng-bind-html="terminal.logs | filterLogs:terminal.filterString")
 
       .status_bar
         a#new_screen_button.button(href="#", ng-click="newTerminal()") New Screen

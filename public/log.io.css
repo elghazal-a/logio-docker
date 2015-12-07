@@ -75,6 +75,7 @@ body {
   clear: left;
 }
 #log_controls .groups {
+  height: 75vh;
   overflow: auto;
 }
 #log_controls .groups::-webkit-scrollbar {
@@ -103,8 +104,9 @@ body {
   background-image: -o-linear-gradient(top, #111, #000);
 }
 #log_controls .groups .group .header .object_name {
-  width: 195px;
+  width: 150px;
   overflow: hidden;
+  word-wrap: break-word;
 }
 #log_controls .groups .group .diode {
   width: 8px;
@@ -275,7 +277,7 @@ body {
 }
 #log_screens div.log_screen div.messages .msg {
   margin: 10px;
-  color: #0c0;
+  color: #c60;
 }
 #log_screens div.log_screen div.messages .msg p,
 #log_screens div.log_screen div.messages .msg p * {
@@ -348,7 +350,7 @@ body {
   display: block;
 }
 #log_screens div.log_screen div.messages span.highlight {
-  background-color: #0e0;
+  background-color: #c80;
   color: #000;
 }
 
