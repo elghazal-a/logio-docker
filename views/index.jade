@@ -30,6 +30,7 @@ html
       .log_screens(ng-cloak)
         .log_screen(ng-repeat="terminal in terminals")
           .controls
+            a.new(href="#", ng-click="newTerminal($index)", ng-if="terminals.length == $index + 1") new
             a.close(href="#", ng-click="removeTerminal($index)", ng-if="$index > 0") close
             a.clear(href="#", ng-click="clearTerminal($index)") clear
             a.filter(href="#")
@@ -40,10 +41,10 @@ html
               p
                 span.message(ng-bind-html="terminal.logs | filterLogs:terminal.filterString")
 
-      .status_bar
-        a#new_screen_button.button(href="#", ng-click="newTerminal()") New Screen
-        .stats
-        div(style="clear: both;")
+      //- .status_bar
+      //-   a#new_screen_button.button(href="#", ng-click="newTerminal()") New Screen
+      //-   .stats
+      //-   div(style="clear: both;")
 
 
   script(src="/socket.io/socket.io.js")

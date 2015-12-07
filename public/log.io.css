@@ -75,7 +75,7 @@ body {
   clear: left;
 }
 #log_controls .groups {
-  height: 75vh;
+  height: 85vh;
   overflow: auto;
 }
 #log_controls .groups::-webkit-scrollbar {

@@ -21,7 +21,7 @@ function containersCtrl($scope, $rootScope, $sce, socketService){
 	mySocket.connectSocket();
 
 	var limitContent = 20000;
-	var terminalHeights = 86;
+	var terminalHeights = 96;
 	var history = {};
 	/*
 		{
