@@ -1,6 +1,6 @@
 # SOAM
 
-Forwad your Dockerized stack logs to a nice looking browser based UI.
+Forward your Dockerized stack logs to a nice looking browser based UI.
 
 ## Features
 * Forward your containers logs to a browser based UI (inspired by [logio](http://logio.org/))
