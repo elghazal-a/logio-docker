@@ -1,0 +1,17 @@
+h1. Safe Apply for AngularJS
+
+Based on code from https://github.com/yearofmoo/AngularJS-Scope.SafeApply
+
+# Open bower.json
+# Add @"angular-safeapply": "~1.0.0"@ to your dependency list
+# Run @bower install@
+# In your application you can now add:
+#* @<script src="components/angular-safeapply/safe-apply.js"></script>@
+
+
+h2. Usage
+
+Add @SafeApply@ to your apps module dependancy list then
+
+# on any scope: @$scope.$safeApply(function() { optionalFunction; });@
+# or used as a service: @$safeApply($scope, function() {});@

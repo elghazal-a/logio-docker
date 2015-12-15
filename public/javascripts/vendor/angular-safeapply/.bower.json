@@ -1,0 +1,16 @@
+{
+  "name": "angular-safeapply",
+  "version": "1.0.4",
+  "main": "./safe-apply.js",
+  "homepage": "https://github.com/cotag/angular-safeapply",
+  "_release": "1.0.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.4",
+    "commit": "e4cfeb5ba23a289bc057ff1b55ac90ee63d19d35"
+  },
+  "_source": "git://github.com/cotag/angular-safeapply.git",
+  "_target": "~1.0.4",
+  "_originalSource": "angular-safeapply",
+  "_direct": true
+}
