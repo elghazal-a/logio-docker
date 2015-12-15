@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:base-0.12.9
+FROM mhart/alpine-node:0.12.9
 
 MAINTAINER Elghazal Ahmed <geniousphp@gmail.com>
 
@@ -9,6 +9,8 @@ WORKDIR /app
 ADD . .
 
 RUN chmod +x ./boot.sh
+
+RUN npm install
 
 EXPOSE  28778
 
