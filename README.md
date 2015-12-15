@@ -15,7 +15,7 @@ Forward your Dockerized stack logs to a nice looking browser based UI.
 ### Docker
 
 ```
-docker run -d -p 28778:28778 -e SHOW_ALL_LOGS=true -v /var/run/docker.sock:/var/run/docker.sock --name=logio geniousphp/logio-docker
+docker run -d -p 28778:28778 -e SHOW_ALL_LOGS=true -v /var/run/docker.sock:/var/run/docker.sock --name=logio geniousphp/logio
 ```
 
 ### Docker-compose
@@ -23,7 +23,7 @@ docker run -d -p 28778:28778 -e SHOW_ALL_LOGS=true -v /var/run/docker.sock:/var/
 ```
 cat >docker-compose.yml <<EOF
 logio:
-  image: geniousphp/logio-docker
+  image: geniousphp/logio
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock
   ports:
