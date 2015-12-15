@@ -1,4 +1,4 @@
-# SOAM
+# LogIO-Docker
 
 Forward your Dockerized stack logs to a nice looking browser based UI.
 
@@ -8,22 +8,22 @@ Forward your Dockerized stack logs to a nice looking browser based UI.
 * Filter containers by label
 * Filter within logs
 * Support multiple screens
-* SOAM is dockerized and built on Alpine Linux (~40MB)
+* LogIO-Docker is dockerized and built on Alpine Linux (~40MB)
 
 ## Usage as a Container
 
 ### Docker
 
 ```
-docker run -d -p 28778:28778 -e SHOW_ALL_LOGS=true -v /var/run/docker.sock:/var/run/docker.sock --name=soam geniousphp/soam
+docker run -d -p 28778:28778 -e SHOW_ALL_LOGS=true -v /var/run/docker.sock:/var/run/docker.sock --name=logio geniousphp/logio-docker
 ```
 
 ### Docker-compose
 
 ```
 cat >docker-compose.yml <<EOF
-soam:
-  image: geniousphp/soam
+logio:
+  image: geniousphp/logio-docker
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock
   ports:
@@ -32,13 +32,13 @@ soam:
   environment: #All these env variables are optionals
   - PORT=28778
   - DOCKER_SOCKET=/var/run/docker.sock 
-  - SHOW_LOG_BY_LABEL=soam.log
+  - SHOW_LOG_BY_LABEL=logio
 
-#SOAM will show logs for this service because of "soam.log" label
+#LogIO-Docker will show logs for this service because of "logio" label
 service:
     ...
     labels:
-    - "soam.log=yes"
+    - "logio=yes"
 EOF
 
 docker-compose up -d
@@ -49,19 +49,19 @@ See it on `http://localhost:28778`
 ## Usage as a Node.js app
 
 ```
-git clone https://github.com/geniousphp/soam.git
-cd soam
+git clone https://github.com/geniousphp/logio-docker.git
+cd logio-docker
 npm install
 SHOW_ALL_LOGS=true node server.js
 ```
 See it on `http://localhost:28778`
 
 ## Config
-SOAM is configurable via environment variables
+LogIO-Docker is configurable via environment variables
 
 * `PORT=28778`: set the port (optionel)
 * `SHOW_ALL_LOGS=true`: this variable is required in order to show logs for all containers (required)
-* `SHOW_LOG_BY_LABEL=soam.log`: if `SHOW_ALL_LOGS` wasn't set, SOAM will filter containers by `soam.log` label (optionel)
+* `SHOW_LOG_BY_LABEL=logio`: if `SHOW_ALL_LOGS` wasn't set, LogIO-Docker will filter containers by `soam.log` label (optionel)
 * `DOCKER_SOCKET=/var/run/docker.sock`: set the docker socket path (optionel)
 
 ## UI
