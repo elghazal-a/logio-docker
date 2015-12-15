@@ -61,7 +61,7 @@ LogIO-Docker is configurable via environment variables
 
 * `PORT=28778`: set the port (optionel)
 * `SHOW_ALL_LOGS=true`: this variable is required in order to show logs for all containers (required)
-* `SHOW_LOG_BY_LABEL=logio`: if `SHOW_ALL_LOGS` wasn't set, LogIO-Docker will filter containers by `soam.log` label (optionel)
+* `SHOW_LOG_BY_LABEL=logio`: if `SHOW_ALL_LOGS` wasn't set, LogIO-Docker will filter containers by `logio` label (optionel)
 * `DOCKER_SOCKET=/var/run/docker.sock`: set the docker socket path (optionel)
 
 ## UI

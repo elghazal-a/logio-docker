@@ -1,7 +1,7 @@
 {
-  "name": "soam",
-  "version": "1.0.0",
-  "description": "Dockerized SOA based application manager",
+  "name": "logio-docker",
+  "version": "2.0.0",
+  "description": "Forward your Dockerized applications logs to browser",
   "main": "server.js",
   "scripts": {
     "build": "echo none",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:geniousphp/soam.git"
+    "url": "git@bitbucket.org:geniousphp/logio-docker.git"
   },
   "keywords": [
     "logs",

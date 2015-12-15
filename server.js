@@ -16,7 +16,7 @@ if (!stats.isSocket()) {
   throw new Error('Are you sure the docker is running?');
 }
 var docker 			= new Docker({ socketPath: socket });
-var showLogByLabel 	= process.env.SHOW_LOG_BY_LABEL || 'soam.log';
+var showLogByLabel 	= process.env.SHOW_LOG_BY_LABEL || 'logio';
 var showAllLogs 	= process.env.SHOW_ALL_LOGS || false;
 
 var Logs = {};
