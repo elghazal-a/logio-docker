@@ -42,21 +42,21 @@ function containersCtrl($scope, $rootScope, $sce, socketService){
 	$scope.terminals = [];
 
 	mySocket.on('terminal:logs', function(data){
-		var tustedLogs = $sce.trustAsHtml(data.logs);
-		history[data.id] += tustedLogs;
+		var trustedLogs = $sce.trustAsHtml(data.logs);
+		history[data.id] += trustedLogs;
         if(history[data.id].length > limitContent){
             history[data.id] = history[data.id].slice(4000);
-            history[data.id] = history[data.id].slice(terminal.content.indexOf("<br>"));
+            history[data.id] = history[data.id].slice(history[data.id].indexOf("<br>"));
         }
 	    $scope.containers.forEach(function(container){
 	        if(container.id == data.id){
 	        	$scope.terminals.forEach(function(terminal, i){
 	        		if(terminal.id == container.terminal){
-	            		terminal.logs += tustedLogs;
+	            		terminal.logs += trustedLogs;
 	        		}
 		            if(terminal.logs.length > limitContent){
 		                terminal.logs = terminal.logs.slice(4000);
-		                terminal.logs = terminal.logs.slice(terminal.content.indexOf("<br>"));
+		                terminal.logs = terminal.logs.slice(terminal.logs.indexOf("<br>"));
 		            }
 	        	});
 	        }
