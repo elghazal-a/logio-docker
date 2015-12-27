@@ -17,4 +17,4 @@ RUN chmod +x ./boot.sh
 
 EXPOSE  28778
 
-CMD ["/bin/sh", "boot.sh"]
+CMD ["node", "server.js"]
