@@ -13,7 +13,6 @@ COPY . /app
 RUN npm install
 RUN apk del make gcc g++ python && \
 	rm -rf /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp
-RUN chmod +x ./boot.sh
 
 EXPOSE  28778
 
