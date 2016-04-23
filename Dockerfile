@@ -6,13 +6,15 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-RUN apk add --update make gcc g++ python
+COPY package.json /app/
+
+RUN apk add --update make gcc g++ python \
+	&& npm install \
+	&& npm cache clean \
+	&& apk del make gcc g++ python \
+	&& rm -rf /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp
 
 COPY . /app
-
-RUN npm install
-RUN apk del make gcc g++ python && \
-	rm -rf /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp
 
 EXPOSE  28778
 
